@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import 'remixicon/fonts/remixicon.css'
+import { AppContext } from '../context/AppContext'
 
 const Navbar = () => {
 
+  const {user} = useContext(AppContext)
   
   const navigate = useNavigate();
 
