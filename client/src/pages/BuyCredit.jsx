@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'motion/react';
 
 const BuyCredit = () => {
   const [isYearly, setIsYearly] = useState(false);
@@ -29,7 +30,12 @@ const BuyCredit = () => {
   ];
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
+    <motion.div
+    initial={{opacity:0.2, y:100}}
+    transition={{duration:1}}
+    whileInView={{opacity:1,y:1}}
+    viewport={{once:true}}
+     style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
       <h1 style={{ textAlign: "center" }}>Pricing Plans</h1>
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
         <button
@@ -87,7 +93,7 @@ const BuyCredit = () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -3,7 +3,7 @@ import React from 'react'
 const GenerateBtn = () => {
   return (
     <div>
-      <h1>mvre</h1>
+      <h1></h1>
     </div>
   )
 }
