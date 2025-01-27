@@ -38,7 +38,7 @@ const loginUser = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ success: true, message: "User does not exist" });
+        .json({ success: false, message: "User does not exist" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -46,7 +46,7 @@ const loginUser = async (req, res) => {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
       res.status(200).json({ success: true, token, user: { name: user.name } });
     } else {
-      return res.status(400).json({ success: false });
+      return res.status(400).json({ success: false, message:"Invalid credentials" });
     }
   } catch (error) {
     console.log(error);
@@ -54,4 +54,15 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+const userCredits = async (req,res)=>{
+  try {
+    const {userId} = req.body;
+    const user = await userModel.findById(userId);
+    res.status(200).json({success:true, credits:user.creditBalance, user:{name:user.name}})
+  } catch (error) {
+    console.log(error.message)
+    res.status(400).json({success:false, message:error.message});
+  }
+}
+
+export { registerUser, loginUser, userCredits };
