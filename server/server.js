@@ -4,6 +4,7 @@ import "dotenv/config";
 import connectDb from "./config/mongodb.js";
 import userRouter from "./routes/userRoute.js";
 import imageRouter from "./routes/imageRoute.js";
+// import('dotenv').config();
 
 const PORT = process.env.PORT || 4000;
 const app = express();

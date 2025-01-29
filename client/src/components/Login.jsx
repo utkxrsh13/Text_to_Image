@@ -17,27 +17,30 @@ const Login = () => {
     setShowPassword((prev) => !prev);
   }
 
-  const onSubmitHandler = async () => {
-    e.preventDeafult();
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
 
     try {
       if (state === 'Login') {
-        const { data } = await axios.post(backendUrl + '/api/users/login', { email, password })
+        const { data } = await axios.post(`${backendUrl}/api/users/login`, { email, password });
         if (data.success) {
-          setToken(data.token)
-          setUser(true)
-          localStorage.setItem('token', data.token)
-          setShowLogin(false)
+          console.log('Token:', data.token);
+          localStorage.setItem('token', data.token);
+          setToken(data.token);
+          setUser(data.user);
+          setShowLogin(false);
+          toast.success('Login successful!');
         } else {
           toast.error(data.message);
         }
       }else{
-        const { data } = await axios.post(backendUrl + '/api/users/register', {name,email, password })
+        const { data } = await axios.post(`${backendUrl}/api/users/register`, { name, email, password });
         if (data.success) {
-          setToken(data.token)
-          setUser(true)
-          localStorage.setItem('token', data.token)
-          setShowLogin(false)
+          localStorage.setItem('token', data.token);
+          setToken(data.token);
+          setUser(data.user);
+          setShowLogin(false);
+          toast.success('Registration successful!');
         } else {
           toast.error(data.message);
         }

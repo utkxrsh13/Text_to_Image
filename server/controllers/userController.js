@@ -42,15 +42,20 @@ const loginUser = async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (isMatch) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-      res.status(200).json({ success: true, token, user: { name: user.name } });
-    } else {
-      return res.status(400).json({ success: false, message:"Invalid credentials" });
+    if (!isMatch) {
+      return res.status(400).json({ success: false, message: "Invalid credentials" });
     }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Respond with token and user details
+    res.status(200).json({ 
+      success: true, 
+      token, 
+      user: { name: user.name, email: user.email } 
+    });
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ success: false, message: error.message });
+    console.error(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
 
