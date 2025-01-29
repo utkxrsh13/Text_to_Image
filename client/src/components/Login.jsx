@@ -1,34 +1,73 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext';
+import axios from 'axios'
+import { toast } from 'react-toastify';
+
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [state, setState] = useState('Login');
-  const {setShowLogin} = useContext(AppContext)
+  const { setShowLogin, backendUrl, setToken, setUser } = useContext(AppContext)
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const toggle = () => {
     setShowPassword((prev) => !prev);
   }
+
+  const onSubmitHandler = async () => {
+    e.preventDeafult();
+
+    try {
+      if (state === 'Login') {
+        const { data } = await axios.post(backendUrl + '/api/users/login', { email, password })
+        if (data.success) {
+          setToken(data.token)
+          setUser(true)
+          localStorage.setItem('token', data.token)
+          setShowLogin(false)
+        } else {
+          toast.error(data.message);
+        }
+      }else{
+        const { data } = await axios.post(backendUrl + '/api/users/register', {name,email, password })
+        if (data.success) {
+          setToken(data.token)
+          setUser(true)
+          localStorage.setItem('token', data.token)
+          setShowLogin(false)
+        } else {
+          toast.error(data.message);
+        }
+      }
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
   return (
     <div className='absolute top-0 left-0 right-0 bottom-0 backdrop-blur-sm z-10 bg-black/20 flex justify-center items-center'>
-      <form className='relative bg-white p-10 rounded-xl text-slate-500' action="">
-        <i onClick={()=>setShowLogin(false)} className="ri-close-line top-5 cursor-pointer right-5 absolute"></i>
+      <form onSubmit={onSubmitHandler} className='relative bg-white p-10 rounded-xl text-slate-500' action="">
+        <i onClick={() => setShowLogin(false)} className="ri-close-line top-5 cursor-pointer right-5 absolute"></i>
         <h1 className='text-center text-2xl text-neutral-700 font-medium'>{state}</h1>
         <p className='text-sm'>Welcome back! Please sign in to continue</p>
 
         {state !== 'Login' && <div className='border-2 px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
           <i class="ri-user-3-line"></i>
-          <input className='outline-none text-sm' type="text" placeholder='Fullname' required />
+          <input onChange={e => setName(e.target.value)} value={name} className='outline-none text-sm' type="text" placeholder='Fullname' required />
         </div>}
 
         <div className='border-2 px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
           <i class="ri-mail-line"></i>
-          <input className='outline-none text-sm' type="email" placeholder='Email' required />
+          <input onChange={e => setEmail(e.target.value)} value={email} className='outline-none text-sm' type="email" placeholder='Email' required />
         </div>
 
         <div className='border-2 px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
           <i class="ri-lock-password-line"></i>
-          <input className='outline-none text-sm' type={showPassword ? "text" : "password"} placeholder='Password' required />
+          <input onChange={e => setPassword(e.target.value)} value={password} className='outline-none text-sm' type={showPassword ? "text" : "password"} placeholder='Password' required />
           {showPassword ? <i onClick={toggle} class="ri-toggle-fill"></i> : <i onClick={toggle} class="ri-toggle-line"></i>}
         </div>
 
