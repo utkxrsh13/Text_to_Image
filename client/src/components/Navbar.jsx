@@ -5,7 +5,7 @@ import { AppContext } from '../context/AppContext'
 
 const Navbar = () => {
 
-  const {user, setShowLogin, logout, credit} = useContext(AppContext)
+  const {user, setShowLogin, logout, credit } = useContext(AppContext)
   
   
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Navbar = () => {
               <i class=" text-xl ri-sparkling-fill"></i>
               <p className='text-xs sm:text-sm font-medium text-gray-700'>Credits Left: {credit}</p>
             </button>
-            <p className='text-gray-700 max-sm:hidden pl-4'>{user.name}</p>
+            <p className='text-gray-700 max-sm:hidden pl-4'>Hi, {user.name}</p>
             <div className='relative group'>
               <i class="text-2xl drop-shadow ri-user-6-fill"></i>
               <div className='absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-12'>

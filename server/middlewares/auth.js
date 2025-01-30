@@ -8,9 +8,9 @@ const userAuth = async (req, res, next) => {
       .json({ success: false, message: "Not Authorizeddd. Login again" });
   }
   try {
-    const tokecDecode = jwt.verify(token, process.env.JWT_SECRET);
-    if (tokecDecode.id) {
-      req.body.userId = tokecDecode.id;
+    const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
+    if (tokenDecode.id) {
+      req.body.userId = tokenDecode.id;
     } else {
       res
         .status(400)
