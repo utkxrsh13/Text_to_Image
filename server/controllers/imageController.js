@@ -11,7 +11,7 @@ export const getImage = async (req, res) => {
     }
 
     if (user.creditBalance == 0 || userModel.creditBalance < 0) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         message: "No credit Balance",
         creditBalance: user.creditBalance,
@@ -38,7 +38,7 @@ export const getImage = async (req, res) => {
     await userModel.findByIdAndUpdate(user._id, {
       creditBalance: user.creditBalance - 1,
     });
-    res.status(400).json({
+    res.status(200).json({
       success: true,
       message: "Image Generated",
       creditBalance: user.creditBalance - 1,
