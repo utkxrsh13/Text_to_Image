@@ -2,9 +2,10 @@ import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 
 
+
 const Result = () => {
 
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState('')
   const [isImageLoaded, setIsImageLoaded] = useState(false)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
@@ -29,7 +30,9 @@ const Result = () => {
 
       <div>
         <div className='relative'>
-          <img src="https://imgs.search.brave.com/WZLWFwzoq3AHJWUezByQApqxWqfiQS2migg0nEn66Dg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZGVtYW5kc2FnZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvY3JhaXlv/bi1BSS1JbWFnZS1H/ZW5lcmF0b3ItLnBu/Zw" alt="" className='max-w-xs rounded ' />
+          {!isImageLoaded?<img src="https://imgs.search.brave.com/WZLWFwzoq3AHJWUezByQApqxWqfiQS2migg0nEn66Dg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZGVtYW5kc2FnZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvY3JhaXlv/bi1BSS1JbWFnZS1H/ZW5lcmF0b3ItLnBu/Zw" alt="" className='max-w-xs rounded ' />:
+          <img src={image} alt="" className='max-w-xs rounded ' />
+          }
           <span className={`absolute h-1 bottom-0 left-0 bg-blue-200 ${loading? 'w-full transition-all duration-[10s]': 'w-0'}`}></span>
         </div>
         <p className={!loading ? "hidden": ""}>Loading...</p>
