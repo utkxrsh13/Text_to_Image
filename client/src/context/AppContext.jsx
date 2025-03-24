@@ -29,7 +29,7 @@ const AppContextProvider = (props) => {
     }
   }
 
-  // const generateImage = async (prompt) => {
+  // const generateIm age = async (prompt) => {
   //   try {
   //     const {data} = await axios.post(backendUrl + '/api/image/generate-image', {prompt}, {headers:{token}})
 
@@ -39,7 +39,6 @@ const AppContextProvider = (props) => {
   //     }else{
   //       toast.error(data.message);
   //       loadCreditsData()
-        
   //       if(data.creditBalance <= 0){
   //         toast.info("Insufficient credits. Redirecting to buy page...");
   //         navigate('/buy')
