@@ -14,7 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
 
   const toggle = () => {
-    setShowPassword((prev) => !prev);
+    setShowPassword(!showPassword);
   }
 
   const onSubmitHandler = async (e) => {
