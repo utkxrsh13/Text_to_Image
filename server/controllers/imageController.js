@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const getImage = async (req, res) => {
   try {
-    const { userId, prompt } = req.body;
+    const { userId, prompt,style,negativePrompt } = req.body;
     const user = await userModel.findById(userId);
     if (!user || !prompt) {
       res.status(400).json({ success: false, message: "Missing Details" });
@@ -18,8 +18,13 @@ export const getImage = async (req, res) => {
       });
     }
 
+    let finalPrompt = prompt;
+    if (style) finalPrompt += `, style: ${style}`;
+    if (negativePrompt) finalPrompt += `, avoid: ${negativePrompt}`;
     const formData = new FormData();
     formData.append("prompt", prompt);
+    
+   
 
     const { data } = await axios.post(
       "https://clipdrop-api.co/text-to-image/v1",

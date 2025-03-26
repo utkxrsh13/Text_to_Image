@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext'
+import GenButton from '../components/GenButton';
 
 
+const styles = ["Realistic", "Anime", "Pixel Art", "3D", "Watercolor"];
 
 const Result = () => {
 
@@ -9,6 +11,7 @@ const Result = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
+  const [selectedStyle, setSelectedStyle] = useState(styles[0]);
 
   const {generateImage} = useContext(AppContext);
 
@@ -16,7 +19,7 @@ const Result = () => {
     e.preventDefault();
     setLoading(true)
     if(input){
-      const image = await generateImage(input);
+      const image = await generateImage(input, selectedStyle);
       if(image){
         setIsImageLoaded(true)
         setImage(image)
@@ -27,6 +30,20 @@ const Result = () => {
 
   return (
     <form onSubmit={onSubmitHandler} action="" className=' flex flex-col justify-center items-center'>
+
+      {/* Style Selection Dropdown */}
+      <div className="mb-4">
+        <label className="text-white">Choose a style:</label>
+        <select
+          className="ml-2 p-2 rounded bg-gray-800 text-white"
+          value={selectedStyle}
+          onChange={(e) => setSelectedStyle(e.target.value)}
+        >
+          {styles.map((style, index) => (
+            <option key={index} value={style}>{style}</option>
+          ))}
+        </select>
+      </div>
 
       <div>
         <div className='relative'>
@@ -40,10 +57,28 @@ const Result = () => {
 
       {!isImageLoaded &&
         <div className='flex bg-neutral-700 w-full max-w-xl mt-7 text-white rounded-full'>
-          <input onChange={e=>setInput(e.target.value)} value={input} type="text" placeholder='What do you want to generate' className='flex-1 bg-transparent outline-none ml-8 max-sm:w-20' />
-          <button type='submit' className='bg-zinc-900 px-10 sm:px-16 py-3 rounded-full'>Generate</button>
+          <input onChange={e=>setInput(e.target.value)} value={input} type="text" placeholder='What do you want to generate' className='flex-1 bg-transparent outline-none ml-8 max-sm:w-20 ' />
+          <GenButton type='submit' />
         </div>
       }
+
+      {/* Style Selection Dropdown */}
+      {/* {!isImageLoaded && (
+        <div className="mt-4">
+          <label className="text-white">Select Style: </label>
+          <select
+            value={selectedStyle}
+            onChange={(e) => setSelectedStyle(e.target.value)}
+            className="ml-2 px-4 py-2 bg-gray-800 text-white rounded-lg"
+          >
+            {styles.map((style) => (
+              <option key={style} value={style}>
+                {style}
+              </option>
+            ))}
+          </select>
+        </div>
+      )} */}
 
       {isImageLoaded &&
         <div className='flex gap-2 flex-wrap justify-center text-white text-sm p-0.5 mt-10 rounded-full'>
