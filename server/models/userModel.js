@@ -17,7 +17,15 @@ const userSchema = new mongoose.Schema({
   creditBalance :{
     type:Number,
     default:5,
-  }
+  },
+  history: [
+    {
+      prompt: String,
+      imageUrl: String,
+      style: String,
+      createdAt: { type: Date, default: Date.now },
+    },
+  ],
 });
 
 const userModel =mongoose.models.user || mongoose.model("user", userSchema)

@@ -3,22 +3,28 @@ import jwt from "jsonwebtoken";
 const userAuth = async (req, res, next) => {
   const { token } = req.headers;
   if (!token) {
-    res
-      .status(400)
-      .json({ success: false, message: "Not Authorizeddd. Login again" });
+    return res
+      .status(401)
+      .json({ success: false, message: "Not Authorized. Login again" });
   }
+  
   try {
     const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
+    
     if (tokenDecode.id) {
-      req.body.userId = tokenDecode.id;
+      req.userId = tokenDecode.id; // Set userId for both GET and POST requests
+      req.body.userId = tokenDecode.id; // Keep this for POST requests compatibility
     } else {
-      res
-        .status(400)
-        .json({ success: false, message: "Not Authorizedd. Login again" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Not Authorized. Login again" });
     }
     next();
   } catch (error) {
-    console.log(error.message);
+    console.log('Token verification error:', error.message);
+    return res
+      .status(401)
+      .json({ success: false, message: "Invalid token. Login again" });
   }
 };
 

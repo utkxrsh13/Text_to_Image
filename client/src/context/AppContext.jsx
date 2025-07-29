@@ -1,8 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+import PropTypes from 'prop-types';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
@@ -15,7 +17,7 @@ const AppContextProvider = (props) => {
 
   const navigate = useNavigate();
 
-  const loadCreditsData = async () => {
+  const loadCreditsData = useCallback(async () => {
     try {
       const { data } = await axios.get(`${backendUrl}/api/users/credits`, { headers: { token } })
 
@@ -27,7 +29,7 @@ const AppContextProvider = (props) => {
       console.log(error)
       toast.error(error.message)
     }
-  }
+  }, [backendUrl, token]);
 
   // const generateIm age = async (prompt) => {
   //   try {
@@ -77,6 +79,25 @@ const AppContextProvider = (props) => {
     }
   };
 
+  const getUserHistory = async () => {
+    try {
+      const { data } = await axios.get(`${backendUrl}/api/users/history`, { 
+        headers: { token } 
+      });
+      
+      if (data.success) {
+        return data.history;
+      } else {
+        toast.error(data.message);
+        return [];
+      }
+    } catch (error) {
+      console.error('History fetch error:', error);
+      toast.error(error.response?.data?.message || 'Failed to fetch history');
+      return [];
+    }
+  };
+
 
   const logout = () => {
     localStorage.removeItem('token')
@@ -88,7 +109,7 @@ const AppContextProvider = (props) => {
     if (token) {
       loadCreditsData()
     }
-  }, [token])
+  }, [token, loadCreditsData])
 
 
   const value = {
@@ -104,6 +125,7 @@ const AppContextProvider = (props) => {
     loadCreditsData,
     logout,
     generateImage,
+    getUserHistory,
   }
 
 
@@ -113,5 +135,9 @@ const AppContextProvider = (props) => {
     </AppContext.Provider>
   )
 }
+AppContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default AppContextProvider
+// export default AppContextProvider

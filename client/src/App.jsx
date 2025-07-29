@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import BuyCredit from './pages/BuyCredit'
 import Result from './pages/Result'
+import History from './pages/History'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Login from './components/Login'
@@ -17,7 +18,7 @@ const App = () => {
 
   return (
     <>
-    <div className='px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen bg-gradient-to-b to-black from-[#F58400]'>
+    <div className='px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden'>
     
       <ToastContainer position='bottom-right'/>
       <Navbar />
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/buy' element={<BuyCredit />} />
         <Route path='/result' element={<Result />} />
+        <Route path='/history' element={<History />} />
       </Routes>
       <Footer />
     </div>
