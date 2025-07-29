@@ -29,7 +29,7 @@ const Navbar = () => {
         </motion.div>
         <div className="hidden sm:block">
           <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            AI Studio
+            InspiraPIX
           </h2>
           <p className="text-xs text-gray-400">Text to Image</p>
         </div>

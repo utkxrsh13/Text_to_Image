@@ -20,7 +20,7 @@ const Footer = () => {
             <i className="text-4xl ri-camera-ai-line bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent"></i>
           </motion.div>
           <div>
-            <h3 className="text-xl font-bold text-white">AI Studio</h3>
+            <h3 className="text-xl font-bold text-white">InspiraPIX</h3>
             <p className="text-xs text-gray-400">Text to Image Generator</p>
           </div>
         </div>
@@ -28,7 +28,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="flex-1 text-center md:text-left">
           <p className='text-gray-400 text-sm'>
-            © 2024 AI Studio. All rights reserved. | Powered by cutting-edge AI technology
+            © 2025 InspiraPIX⭐. All rights reserved. | Powered by cutting-edge AI technology
           </p>
         </div>
 
