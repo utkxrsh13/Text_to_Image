@@ -10,7 +10,7 @@
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_AI_Studio-orange?style=for-the-badge)](https://your-demo-link.com)
+
 [![GitHub Stars](https://img.shields.io/github/stars/utkxrsh13/Text_to_Image?style=for-the-badge&color=yellow)](https://github.com/utkxrsh13/Text_to_Image/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
@@ -32,16 +32,7 @@
 - ⬇️ **High-Quality Downloads** - Download images in multiple resolutions
 - 🌙 **Modern UI/UX** - Professional dark theme with smooth animations
 
-## 🖼️ Screenshots
 
-### Home Page
-<img src="https://via.placeholder.com/800x400/1a1a1a/f97316?text=AI+Studio+Home+Page" alt="Home Page" width="100%">
-
-### Image Generation
-<img src="https://via.placeholder.com/800x400/1a1a1a/f97316?text=Image+Generation+Interface" alt="Generation Interface" width="100%">
-
-### History Dashboard
-<img src="https://via.placeholder.com/800x400/1a1a1a/f97316?text=History+Management" alt="History Dashboard" width="100%">
 
 ## 🛠️ Tech Stack
 
@@ -259,12 +250,7 @@ Found a bug or have a feature request?
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
 
-- [ClipDrop API](https://clipdrop.co/) for AI image generation
-- [Tailwind CSS](https://tailwindcss.com/) for the amazing utility framework
-- [Framer Motion](https://www.framer.com/motion/) for smooth animations
-- [React](https://reactjs.org/) team for the excellent library
 
 ## 🌟 Show Your Support
 
@@ -283,5 +269,5 @@ If you find this project helpful, please consider:
 ---
 
 <div align="center">
-  <sub>Built with ❤️ using MERN Stack • © 2024 AI Studio</sub>
+  <sub>Built with ❤️ using MERN Stack • © 2025 InspiraPIX</sub>
 </div>
