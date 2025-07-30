@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
 
 const connectDb = async () => {
+  try {
+    mongoose.connection.on("connected", () => {
+      console.log("Database Connected");
+    });
 
-  mongoose.connection.on('connected', ()=>{
-    console.log('DataBase Connected')
-  })
-
-  await mongoose.connect(`${process.env.MONGODB_URI}/InspiraPix`)
-}
+    await mongoose.connect(`${process.env.MONGODB_URI}/InspiraPix`);
+  } catch (error) {
+    console.error("Database connection error:", error.message);
+    process.exit(1); // Exit the app if DB connection fails
+  }
+};
 
 export default connectDb;
