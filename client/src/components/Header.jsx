@@ -36,7 +36,7 @@ const Header = () => {
       initial={{opacity:0.2, y:-20}}
       transition={{delay:0.4,duration:0.8}}
       animate={{opacity:1,y:0}}
-      className='text-4xl max-w-[300px] sm:text-7xl sm:max-w-[590px] mx-auto mt-10 text-center font-bold'>
+      className='text-4xl max-w-[300px] sm:text-7xl sm:max-w-[590px] bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 bg-clip-text text-transparent mx-auto mt-10 text-center font-bold'>
         Transform Text into <br />
         <span className='bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 bg-clip-text text-transparent'>
           Stunning Art
